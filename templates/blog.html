@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- ============================================================
+     ENCABEZADO DE PÁGINA
+============================================================ -->
+<section class="page-hero">
+    <div class="container">
+        <h1 class="page-hero-title fade-in">Blog <span class="accent">Técnico</span></h1>
+        <p class="page-hero-sub fade-in">Artículos donde comparto sobre DevOps, Cloud y desarrollo.</p>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     LISTADO DE ARTÍCULOS
+============================================================ -->
+<section class="section-dark">
+    <div class="container">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Blog <span class="accent">Técnico</span>
+                <span class="live-dot"></span>
+            </h2>
+        </div>
+
+        <div class="blog-list">
+
+            <!-- Artículo 1: Cómo creé mi primera página web -->
+            <a href="{{ url_for('blog_primera_pagina') }}" class="blog-list-item fade-in">
+                <div class="blog-list-img blog-img-1"></div>
+                <div class="blog-list-body">
+                    <h3 class="blog-list-title">Cómo Creé mi Primera Página Web</h3>
+                    <p class="blog-list-desc">
+                        Cuento cómo construí este portafolio personal desde cero usando
+                        Python con Flask como backend, templates HTML con Jinja2, CSS personalizado
+                        con diseño dark mode, y cómo lo dockericé y desplegué en un clúster
+                        local de Kubernetes usando Kind. Un proyecto real donde aprendí a unir
+                        desarrollo web con infraestructura DevOps.
+                    </p>
+                    <div class="blog-list-meta">
+                        <span class="blog-date">2026</span>
+                        <span class="blog-tag">
+                            <i class="devicon-python-plain"></i> Flask
+                        </span>
+                        <span class="blog-tag">
+                            <i class="devicon-docker-plain"></i> Docker
+                        </span>
+                    </div>
+                </div>
+                <div class="blog-list-tag">
+                    <span class="tech-pill">
+                        <i class="devicon-kubernetes-plain colored"></i> Kubernetes
+                    </span>
+                </div>
+            </a>
+
+            <!-- Artículo 2: Menú para cocinería con IA -->
+            <a href="{{ url_for('blog_menu_cocineria') }}" class="blog-list-item fade-in">
+                <div class="blog-list-img blog-img-2"></div>
+                <div class="blog-list-body">
+                    <h3 class="blog-list-title">Menú para una Cocinería del Sur de Chile con IA</h3>
+                    <p class="blog-list-desc">
+                        Un proyecto fuera de lo técnico: cómo usé inteligencia artificial para
+                        ayudar a un negocio local del sur de Chile a digitalizar su menú.
+                        Desde el diseño del contenido hasta la generación de imágenes y textos
+                        con IA, este artículo muestra cómo la tecnología puede aplicarse
+                        en contextos cotidianos y locales.
+                    </p>
+                    <div class="blog-list-meta">
+                        <span class="blog-date">2026</span>
+                        <span class="blog-tag cicd">
+                            IA
+                        </span>
+                    </div>
+                </div>
+                <div class="blog-list-tag">
+                    <span class="tech-pill cicd-pill">IA</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

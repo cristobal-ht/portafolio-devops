@@ -1,0 +1,244 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<!-- ============================================================
+     SECCIÓN HERO: Primera pantalla que ve el visitante
+============================================================ -->
+<section class="hero-section">
+    <div class="hero-grid-bg"></div>
+    <div class="container hero-container">
+
+        <!-- Columna de texto (izquierda) -->
+        <div class="hero-text fade-in">
+            <p class="hero-available">
+                <span class="pulse-dot"></span>
+                DISPONIBLE PARA NUEVOS DESAFÍOS
+            </p>
+            <h1 class="hero-name">Cristóbal <br>Hernández</h1>
+            <h2 class="hero-role">Cloud & DevOps Engineer <span class="role-badge">Junior</span></h2>
+            <p class="hero-desc">
+                Soy un DevOps y Cloud Engineer junior interesado en la automatización de infraestructura y el desarrollo de pipelines CI/CD.
+
+Tengo experiencia trabajando con Kubernetes y Google Cloud, creando builds y pipelines que ayudan a mejorar los procesos de despliegue y desarrollo.
+
+Me enfoco en seguir aprendiendo y aplicar buenas prácticas para construir infraestructuras más automatizadas, escalables y fáciles de mantener.
+            </p>
+            <div class="hero-btns">
+                <a href="https://www.linkedin.com/in/crist%C3%B3bal-hern%C3%A1ndez-56460b272/" target="_blank" class="btn-primary-custom">
+                    <i class="devicon-linkedin-plain"></i> LinkedIn
+                </a>
+                <a href="https://drive.google.com/uc?export=download&id=1xN7U4AubkVCIF4M9Cx9rnFFtYCqAcgko" class="btn-outline-custom" download>
+                    ↓ Descargar CV
+                </a>
+            </div>
+        </div>
+
+        <!-- Columna de imagen (derecha) -->
+        <div class="hero-img-wrap fade-in">
+            <div class="hero-photo-placeholder">
+                <img src="{{ url_for('static', filename='img/foto.png') }}" alt="Cristóbal Hernández">
+            </div>
+            <div class="floating-badge badge-k8s">
+                <i class="devicon-kubernetes-plain"></i> Kubernetes
+            </div>
+            <div class="floating-badge badge-gcp">
+                <i class="devicon-googlecloud-plain colored"></i> Google Cloud
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECCIÓN CV — Visualizador y descarga del currículum
+============================================================ -->
+<section class="section-alt">
+    <div class="container">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Mi <span class="accent">Currículum</span></h2>
+            <p class="section-subtitle">Descarga o visualiza mi CV directamente aquí.</p>
+        </div>
+        <div class="cv-wrap fade-in">
+            <div class="text-center mb-4">
+                <a href="https://drive.google.com/uc?export=download&id=1xN7U4AubkVCIF4M9Cx9rnFFtYCqAcgko"
+                   class="btn-primary-custom" download>
+                    ↓ Descargar CV (PDF)
+                </a>
+            </div>
+            <iframe
+                src="https://drive.google.com/file/d/1xN7U4AubkVCIF4M9Cx9rnFFtYCqAcgko/preview"
+                width="100%"
+                height="800px"
+                style="border-radius: 12px; border: 1px solid var(--border);"
+                allow="autoplay">
+            </iframe>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     PROYECTOS DESTACADOS
+============================================================ -->
+<section class="section-dark">
+    <div class="container">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Proyectos <span class="accent">Destacados</span></h2>
+            <p class="section-subtitle">Proyectos reales donde he implementado infraestructura y desarrollo web.</p>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Proyecto 1: App Flask en Kubernetes -->
+            <div class="project-card fade-in">
+                <div class="project-card-header">
+                    <h3>App Flask en <span class="accent">Kubernetes</span></h3>
+                    <span class="project-tag">GKE</span>
+                </div>
+                <ul class="project-features">
+                    <li>Dockerización de la aplicación</li>
+                    <li>Despliegue en Google Cloud GKE</li>
+                    <li>Pipeline CI/CD con GitLab CI</li>
+                    <li>Nginx como reverse proxy</li>
+                    <li>HTTPS con Let's Encrypt</li>
+                </ul>
+                <div class="project-tech-row">
+                    <span class="tech-pill"><i class="devicon-python-plain"></i> Python / Flask</span>
+                    <span class="tech-pill"><i class="devicon-googlecloud-plain colored"></i> Google Cloud</span>
+                    <span class="tech-pill"><i class="devicon-docker-plain colored"></i> Docker</span>
+                    <span class="tech-pill"><i class="devicon-gitlab-plain colored"></i> GitLab CI</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://gitlab.com/cristobal.hernandez.777" target="_blank" class="proj-link">
+                        <i class="devicon-gitlab-plain colored"></i> GitLab
+                    </a>
+                    <a href="{{ url_for('proyectos') }}" class="proj-link accent-link">Ver Detalle →</a>
+                </div>
+            </div>
+
+            <!-- Proyecto 2: Este portafolio -->
+            <div class="project-card fade-in">
+                <div class="project-card-header">
+                    <h3>Portafolio Web <span class="accent">Personal</span></h3>
+                    <span class="project-tag">Flask</span>
+                </div>
+                <ul class="project-features">
+                    <li>Desarrollado con Python & Flask</li>
+                    <li>Templates HTML con Jinja2</li>
+                    <li>Diseño responsive con CSS personalizado</li>
+                    <li>Dockerizado y desplegado en Kubernetes</li>
+                    <li>Script de despliegue automatizado (.sh)</li>
+                </ul>
+                <div class="project-tech-row">
+                    <span class="tech-pill"><i class="devicon-python-plain"></i> Python / Flask</span>
+                    <span class="tech-pill"><i class="devicon-docker-plain colored"></i> Docker</span>
+                    <span class="tech-pill"><i class="devicon-kubernetes-plain colored"></i> Kubernetes</span>
+                    <span class="tech-pill"><i class="devicon-gitlab-plain colored"></i> GitLab CI</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://gitlab.com/cristobal.hernandez.777" target="_blank" class="proj-link">
+                        <i class="devicon-gitlab-plain colored"></i> GitLab
+                    </a>
+                    <a href="{{ url_for('proyectos') }}" class="proj-link accent-link">Ver Detalle →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     STACK PREVIEW
+============================================================ -->
+<section class="section-alt">
+    <div class="container">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Stack & <span class="accent">Herramientas</span></h2>
+            <p class="section-subtitle">Tecnologías que he usado y estoy aprendiendo.</p>
+        </div>
+        <div class="stack-grid fade-in">
+            <div class="stack-category">
+                <h4 class="stack-cat-title">Cloud</h4>
+                <div class="stack-icons">
+                    <div class="stack-item">
+                        <i class="devicon-googlecloud-plain colored"></i>
+                        <span>Google Cloud</span>
+                    </div>
+                    <div class="stack-item">
+                        <i class="devicon-kubernetes-plain colored"></i>
+                        <span>GKE</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stack-category">
+                <h4 class="stack-cat-title">Containers</h4>
+                <div class="stack-icons">
+                    <div class="stack-item">
+                        <i class="devicon-docker-plain colored"></i>
+                        <span>Docker</span>
+                    </div>
+                    <div class="stack-item">
+                        <i class="devicon-kubernetes-plain colored"></i>
+                        <span>Kubernetes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stack-category">
+                <h4 class="stack-cat-title">CI/CD</h4>
+                <div class="stack-icons">
+                    <div class="stack-item">
+                        <i class="devicon-gitlab-plain colored"></i>
+                        <span>GitLab CI</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stack-category">
+                <h4 class="stack-cat-title">Monitoring & Logs</h4>
+                <div class="stack-icons">
+                    <div class="stack-item">
+                        <i class="devicon-prometheus-original colored"></i>
+                        <span>Prometheus + Grafana</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4 fade-in">
+            <a href="{{ url_for('stack') }}" class="btn-outline-custom">Ver Stack Completo →</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     BLOG PREVIEW
+============================================================ -->
+<section class="section-dark">
+    <div class="container">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Blog <span class="accent">Técnico</span></h2>
+            <p class="section-subtitle">Artículos donde comparto sobre DevOps, Cloud y desarrollo.</p>
+        </div>
+        <div class="blog-grid">
+            <a href="{{ url_for('blog') }}" class="blog-card fade-in">
+                <div class="blog-card-img blog-img-1"></div>
+                <div class="blog-card-body">
+                    <span class="blog-tag">Flask</span>
+                    <h4>Cómo Creé mi Primera Página Web</h4>
+                    <p>Desarrollo de un portafolio personal con Python, Flask, Docker y Kubernetes.</p>
+                    <span class="blog-date">2024</span>
+                </div>
+            </a>
+            <a href="{{ url_for('blog') }}" class="blog-card fade-in">
+                <div class="blog-card-img blog-img-2"></div>
+                <div class="blog-card-body">
+                    <span class="blog-tag cicd">IA</span>
+                    <h4>Menú para una Cocinería del Sur de Chile con IA</h4>
+                    <p>Cómo usé inteligencia artificial para crear un menú digital para un negocio local.</p>
+                    <span class="blog-date">2024</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

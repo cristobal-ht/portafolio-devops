@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- ============================================================
+     ENCABEZADO DE PÁGINA
+============================================================ -->
+<section class="page-hero">
+    <div class="container">
+        <h1 class="page-hero-title fade-in">Proyectos</h1>
+        <p class="page-hero-sub fade-in">
+            Proyectos reales en los que he trabajado, enfocados en automatización,
+            despliegue y desarrollo de infraestructura.
+        </p>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     PROYECTO 1: App Flask en Kubernetes / GKE
+============================================================ -->
+<section class="section-dark">
+    <div class="container">
+        <div class="project-detail fade-in">
+            <h2 class="project-detail-title">
+                App Flask en <span class="accent">Kubernetes</span>
+            </h2>
+            <p class="project-detail-desc">
+                Desplegué una aplicación Python/Flask en un clúster de Kubernetes en
+                Google Cloud (GKE), automatizando el pipeline CI/CD con GitLab y
+                monitorizando su infraestructura.
+            </p>
+
+            <div class="arch-diagram fade-in">
+                <div class="arch-node user-node">
+                    <span>👤 User</span>
+                    <div class="arch-label">HTTPS<br>Let's Encrypt</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <i class="devicon-nginx-original colored"></i>
+                    <span>Nginx</span>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <i class="devicon-docker-plain colored"></i>
+                    <span>Build & Push</span>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <i class="devicon-docker-plain colored"></i>
+                    <span>DockerHub</span>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node highlight-node">
+                    <i class="devicon-googlecloud-plain colored"></i>
+                    <span>GKE</span>
+                </div>
+            </div>
+
+            <ul class="project-features-detail">
+                <li>Dockerización de la aplicación</li>
+                <li>Despliegue en Google Cloud GKE</li>
+                <li>Pipeline CI/CD con GitLab CI</li>
+                <li>Nginx como reverse proxy con HTTPS seguro</li>
+                <li>Monitoreo con Prometheus & Grafana</li>
+            </ul>
+
+            <div class="project-tech-row">
+                <span class="tech-pill"><i class="devicon-python-plain"></i> Python / Flask</span>
+                <span class="tech-pill"><i class="devicon-googlecloud-plain colored"></i> Google Cloud</span>
+                <span class="tech-pill"><i class="devicon-kubernetes-plain colored"></i> GKE</span>
+                <span class="tech-pill"><i class="devicon-docker-plain colored"></i> Docker</span>
+                <span class="tech-pill"><i class="devicon-gitlab-plain colored"></i> GitLab CI</span>
+            </div>
+
+            <div class="project-links mt-3">
+                <a href="https://gitlab.com/cristobal.hernandez.777" target="_blank" class="proj-link">
+                    <i class="devicon-gitlab-plain colored"></i> GitLab
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     PROYECTO 2: Este portafolio web
+============================================================ -->
+<section class="section-alt">
+    <div class="container">
+        <div class="project-detail fade-in">
+            <h2 class="project-detail-title">
+                Portafolio Web <span class="accent">Personal</span>
+            </h2>
+            <p class="project-detail-desc">
+                Desarrollo de este sitio web desde cero usando Python y Flask como backend,
+                templates Jinja2 para el frontend, Docker para contenerización y Kubernetes
+                para el despliegue. Todo automatizado con un script bash.
+            </p>
+
+            <div class="arch-diagram fade-in">
+                <div class="arch-node user-node">
+                    <span>👤 User</span>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <i class="devicon-python-plain colored"></i>
+                    <span>Flask App</span>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <i class="devicon-docker-plain colored"></i>
+                    <span>Docker</span>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node highlight-node">
+                    <i class="devicon-kubernetes-plain colored"></i>
+                    <span>Kubernetes</span>
+                </div>
+            </div>
+
+            <ul class="project-features-detail">
+                <li>Backend con Python & Flask — manejo de rutas y templates</li>
+                <li>Templates HTML con Jinja2 — reutilización de layout con herencia</li>
+                <li>CSS personalizado — diseño dark mode responsive</li>
+                <li>Dockerfile — contenerización completa de la app</li>
+                <li>deployment.yaml — configuración del despliegue en Kubernetes</li>
+                <li>despliege.sh — script bash que automatiza build, carga y port-forward</li>
+            </ul>
+
+            <div class="project-tech-row">
+                <span class="tech-pill"><i class="devicon-python-plain"></i> Python / Flask</span>
+                <span class="tech-pill"><i class="devicon-docker-plain colored"></i> Docker</span>
+                <span class="tech-pill"><i class="devicon-kubernetes-plain colored"></i> Kubernetes</span>
+                <span class="tech-pill"><i class="devicon-gitlab-plain colored"></i> GitLab CI</span>
+            </div>
+
+            <div class="project-links mt-3">
+                <a href="https://gitlab.com/cristobal.hernandez.777" target="_blank" class="proj-link">
+                    <i class="devicon-gitlab-plain colored"></i> GitLab
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

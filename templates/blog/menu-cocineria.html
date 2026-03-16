@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <span class="blog-tag mb-3 d-inline-block">IA</span>
+        <h1 class="page-hero-title fade-in">Menú para una Cocinería del <span class="accent">Sur de Chile</span> con IA</h1>
+        <p class="page-hero-sub fade-in">2026 · 4 min de lectura</p>
+    </div>
+</section>
+
+<section class="section-dark">
+    <div class="container">
+        <div class="blog-article fade-in">
+         <img src="{{ url_for('static', filename='img/blog-menu.jpg') }}" 
+         alt="Menú Cocinería Chiloé" 
+         class="blog-article-img">   
+
+            <p>
+                Un proyecto fuera de lo técnico: cómo usé inteligencia artificial para
+                ayudar a un familiar a crear el menú de su cocinería.
+            </p>
+
+            <h2>El contexto</h2>
+            <p>
+                Una cocinería familiar del sur de Chile, específicamente de Chiloé, necesitaba
+                mostrar su carta y además tener una correcta traducción al inglés. Sin presupuesto
+                para un diseñador y con poco tiempo, la IA terminó siendo la herramienta perfecta
+                para lograrlo rápido y con buenos resultados.
+            </p>
+
+            <h2>Cómo lo hice</h2>
+            <p>
+                Usé inteligencia artificial para traducir los textos descriptivos de cada plato,
+                trabajar las imágenes del menú y armar el diseño general. En pocas horas el negocio
+                tenía una carta digital lista, que podía usarse tanto para imprimir como para
+                compartir en formato digital.
+            </p>
+
+            <h2>Conclusión</h2>
+            <p>
+                Este proyecto me mostró que la tecnología no es solo para grandes empresas.
+                Con las herramientas correctas, cualquier negocio local puede digitalizarse
+                de forma rápida y accesible.
+            </p>
+
+            <div class="project-tech-row mt-5">
+                <span class="tech-pill">IA</span>
+                <span class="tech-pill">Diseño</span>
+                <span class="tech-pill">Digital</span>
+            </div>
+
+            <div class="mt-5">
+                <a href="{{ url_for('blog') }}" class="btn-outline-custom">← Volver al Blog</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

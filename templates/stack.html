@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- ============================================================
+     ENCABEZADO DE PÁGINA
+============================================================ -->
+<section class="page-hero">
+    <div class="container">
+        <h1 class="page-hero-title fade-in">Stack & <span class="accent">Herramientas</span></h1>
+        <p class="page-hero-sub fade-in">Tecnologías que he usado y estoy aprendiendo.</p>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     STACK COMPLETO
+============================================================ -->
+<section class="section-dark">
+    <div class="container">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Stack & <span class="accent">Herramientas</span>
+                <span class="live-dot"></span>
+            </h2>
+            <p class="section-subtitle">Tecnologías que he usado y estoy aprendiendo.</p>
+        </div>
+
+        <div class="stack-full-grid fade-in">
+
+            <!-- CLOUD -->
+            <div class="stack-full-category">
+                <h4 class="stack-cat-title">Cloud</h4>
+                <div class="stack-item-lg">
+                    <i class="devicon-googlecloud-plain colored"></i>
+                    <span>Google Cloud</span>
+                </div>
+                <div class="stack-sub-items">
+                    <span class="stack-sub">GKE</span>
+                    <span class="stack-sub">Cloud Run</span>
+                    <span class="stack-sub">Cloud Storage</span>
+                </div>
+            </div>
+
+            <!-- CONTAINERS -->
+            <div class="stack-full-category">
+                <h4 class="stack-cat-title">Containers</h4>
+                <div class="stack-item-lg">
+                    <i class="devicon-docker-plain colored"></i>
+                    <span>Docker</span>
+                </div>
+                <div class="stack-item-lg">
+                    <i class="devicon-kubernetes-plain colored"></i>
+                    <span>Kubernetes</span>
+                </div>
+            </div>
+
+            <!-- CI/CD -->
+            <div class="stack-full-category">
+                <h4 class="stack-cat-title">CI/CD</h4>
+                <div class="stack-item-lg">
+                    <i class="devicon-gitlab-plain colored"></i>
+                    <span>GitLab CI</span>
+                </div>
+            </div>
+
+            <!-- MONITORING -->
+            <div class="stack-full-category">
+                <h4 class="stack-cat-title">Monitoring & Logs</h4>
+                <div class="stack-item-lg">
+                    <i class="devicon-prometheus-original colored"></i>
+                    <span>Prometheus + Grafana</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="project-tech-row mt-4 fade-in">
+            <span class="tech-pill"><i class="devicon-python-plain"></i> Python / Flask</span>
+            <span class="tech-pill"><i class="devicon-googlecloud-plain colored"></i> Google Cloud</span>
+            <span class="tech-pill"><i class="devicon-kubernetes-plain colored"></i> GKE</span>
+            <span class="tech-pill"><i class="devicon-docker-plain colored"></i> Docker & Kubernetes</span>
+            <span class="tech-pill"><i class="devicon-gitlab-plain colored"></i> GitLab CI</span>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     QUÉ ESTOY APRENDIENDO — Solo Kubernetes Avanzado
+============================================================ -->
+<section class="section-alt">
+    <div class="container">
+        <div class="section-header fade-in">
+            <h2 class="section-title">
+                Qué Estoy <span class="accent">Aprendiendo</span> Ahora
+                <span class="live-dot"></span>
+            </h2>
+        </div>
+
+        <div class="learning-list fade-in">
+            <div class="learning-item">
+                <div class="learning-icon">
+                    <i class="devicon-kubernetes-plain colored"></i>
+                </div>
+                <span class="learning-name">Kubernetes Avanzado</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- ============================================================
+     ENCABEZADO DEL ARTÍCULO
+============================================================ -->
+<section class="page-hero">
+    <div class="container">
+        <!-- Etiqueta de categoría -->
+        <span class="blog-tag mb-3 d-inline-block">Flask & DevOps</span>
+        <!-- Título del artículo — edítalo aquí -->
+        <h1 class="page-hero-title fade-in">Cómo Creé mi <span class="accent">Primera Página Web</span></h1>
+        <!-- Fecha y tiempo de lectura -->
+        <p class="page-hero-sub fade-in">2026 · 5 min de lectura</p>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     CONTENIDO DEL ARTÍCULO
+     Para editar: simplemente cambia el texto dentro de cada <p>
+     Para agregar secciones: copia un bloque <h2> + <p> y pégalo
+============================================================ -->
+<section class="section-dark">
+    <div class="container">
+        <div class="blog-article fade-in">
+
+            <!-- INTRODUCCIÓN -->
+            <p>
+                Este proyecto nació con un objetivo claro: tener un portafolio propio donde
+                mostrar mi transición hacia el mundo DevOps.
+            </p>
+
+            <!-- SECCIÓN 1 -->
+            <h2>El punto de partida: Python y Flask</h2>
+            <p>
+                Elegí <strong>Python con Flask</strong> porque es un framework minimalista,
+                perfecto para aprender. Flask no te da nada "mágico" — tú defines cada ruta,
+                cada template, cada respuesta. Eso lo hace ideal para entender cómo funciona
+                la web por dentro.
+            </p>
+            <p>
+                El archivo principal es <code>paginaweb.py</code>. Cada función con
+                <code>@app.route()</code> define una URL de la página. Por ejemplo:
+            </p>
+
+            <!-- Bloque de código -->
+            <div class="code-block">
+                <pre><code>@app.route("/")
+def home():
+    return render_template("home.html")</code></pre>
+            </div>
+
+            <!-- SECCIÓN 2 -->
+            <h2>Templates con Jinja2</h2>
+            <p>
+                Flask usa <strong>Jinja2</strong> para los templates HTML. Lo más útil fue
+                la herencia de templates: creé un <code>layout.html</code> con la navbar y
+                el footer, y cada página solo define su contenido propio usando
+                <code>{% raw %}{% block content %}{% endblock %}{% endraw %}</code>.
+                Así evité repetir código en cada archivo.
+            </p>
+
+            <!-- SECCIÓN 3 -->
+            <h2>Dockerización</h2>
+            <p>
+                Una vez funcionando localmente, el siguiente paso fue crear el
+                <strong>Dockerfile</strong>. La idea es simple: empaquetar la app y todas
+                sus dependencias en una imagen que corra igual en cualquier entorno.
+            </p>
+
+            <div class="code-block">
+                <pre><code>docker build -t paginaweb:1.0 .
+docker run -p 8080:8080 paginaweb:1.0</code></pre>
+            </div>
+
+            <!-- SECCIÓN 4 -->
+            <h2>Despliegue en Kubernetes</h2>
+            <p>
+                El paso final fue desplegar la imagen en un clúster local con
+                <strong>Kind</strong>. Creé un <code>deployment.yaml</code> que define
+                el contenedor y el servicio, y un script <code>despliege.sh</code> que
+                automatiza todo el proceso: build, carga al clúster y port-forward.
+            </p>
+
+            <!-- CONCLUSIÓN -->
+            <h2>Conclusión</h2>
+            <p>
+                No es solo teoría. Es un proyecto real, corriendo en Kubernetes,
+                que puedo mostrar como parte de mi camino hacia DevOps.
+            </p>
+
+            <!-- Tags del artículo -->
+            <div class="project-tech-row mt-5">
+                <span class="tech-pill"><i class="devicon-python-plain"></i> Python / Flask</span>
+                <span class="tech-pill"><i class="devicon-docker-plain colored"></i> Docker</span>
+                <span class="tech-pill"><i class="devicon-kubernetes-plain colored"></i> Kubernetes</span>
+            </div>
+
+            <!-- Botón volver al blog -->
+            <div class="mt-5">
+                <a href="{{ url_for('blog') }}" class="btn-outline-custom">← Volver al Blog</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

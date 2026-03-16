@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mi-sitio-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mi-sitio
+  template:
+    metadata:
+      labels:
+        app: mi-sitio
+    spec:
+      containers:
+      - name: python-contenedor
+        image: paginaweb:1.0 # <--- DEBE SER ESTE NOMBRE
+        imagePullPolicy: Never 
+        ports:
+        - containerPort: 8080 # Asegúrate que tu script use este puerto
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mi-sitio-service
+spec:
+  selector:
+    app: mi-sitio
+  ports:
+    - protocol: TCP
+      port: 8080      
+      targetPort: 8080
