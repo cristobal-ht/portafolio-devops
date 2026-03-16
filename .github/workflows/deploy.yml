@@ -1,0 +1,120 @@
+# ============================================================
+# deploy.yml — Pipeline CI/CD con GitHub Actions
+# Usa Workload Identity Federation para autenticarse con GCP
+# sin necesidad de llaves JSON
+# ============================================================
+
+name: Deploy to GKE
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  PROJECT_ID: project-d121c3c4-ce23-4dcc-aab
+  GKE_CLUSTER: mi-pagina-web
+  GKE_ZONE: us-central1-c
+  IMAGE_NAME: mi-web-app
+  IMAGE_TAG: "1.0"
+  REGION: us-central1
+  # ID del Workload Identity Provider que creamos
+  WORKLOAD_IDENTITY_PROVIDER: projects/190259424084/locations/global/workloadIdentityPools/github-pool/providers/github-provider
+  # Service Account que usará el pipeline
+  SERVICE_ACCOUNT: github-actions@project-d121c3c4-ce23-4dcc-aab.iam.gserviceaccount.com
+
+jobs:
+
+  # ============================================================
+  # JOB 1: BUILD AND PUSH
+  # Construye la imagen Docker y la sube al Artifact Registry
+  # ============================================================
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    # Necesario para Workload Identity Federation
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      # 1. Descarga el código del repositorio
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Autenticación con GCP usando Workload Identity (sin llave JSON)
+      #    GitHub genera un token temporal que GCP acepta gracias al pool que configuramos
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+
+      # 3. Configura el SDK de Google Cloud
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      # 4. Autoriza Docker para subir imágenes al Artifact Registry
+      - name: Configure Docker for GCP
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+      # 5. Construye la imagen Docker
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/cris-repo/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
+
+      # 6. Sube la imagen al Artifact Registry
+      - name: Push Docker image
+        run: |
+          docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/cris-repo/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
+  # ============================================================
+  # JOB 2: DEPLOY ON GKE
+  # Despliega la imagen en el cluster de Kubernetes
+  # ============================================================
+  deploy-on-gke:
+    name: Deploy on GKE
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      # 1. Descarga el código del repositorio
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Autenticación con GCP
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+
+      # 3. Configura el SDK de Google Cloud
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      # 4. Obtiene las credenciales del cluster de Kubernetes
+      - name: Authenticate with GKE
+        run: |
+          gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} \
+            --zone ${{ env.GKE_ZONE }} \
+            --project ${{ env.PROJECT_ID }}
+
+      # 5. sed reemplaza la línea "image:" en deployment.yaml con la imagen real
+      #    Así el deployment siempre usa la imagen que acabamos de construir
+      - name: Update image in deployment.yaml
+        run: |
+          sed -i "s|image:.*|image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/cris-repo/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}|g" deployment.yaml
+
+      # 6. Aplica los manifiestos de Kubernetes en el cluster
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f deployment.yaml
+
+      # 7. Espera a que el deployment esté listo y verifica que corrió bien
+      - name: Verify deployment
+        run: |
+          kubectl rollout status deployment/mi-sitio-deployment
