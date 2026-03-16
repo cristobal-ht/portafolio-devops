@@ -15,7 +15,7 @@ spec:
       containers:
       - name: python-contenedor
         image: paginaweb:1.0 # <--- DEBE SER ESTE NOMBRE
-        imagePullPolicy: Never 
+        imagePullPolicy: Always 
         ports:
         - containerPort: 8080 # Asegúrate que tu script use este puerto
 ---
