@@ -13,7 +13,7 @@ on:
 
 env:
   PROJECT_ID: project-d121c3c4-ce23-4dcc-aab
-  GKE_CLUSTER: mi-pagina-web
+  GKE_CLUSTER: pagina-web
   GKE_ZONE: us-central1-c
   IMAGE_NAME: mi-web-app
   IMAGE_TAG: "1.0"
