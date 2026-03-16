@@ -99,6 +99,7 @@ jobs:
       # 4. Obtiene las credenciales del cluster de Kubernetes
       - name: Authenticate with GKE
         run: |
+          gcloud components install gke-gcloud-auth-plugin --quiet
           gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} \
             --zone ${{ env.GKE_ZONE }} \
             --project ${{ env.PROJECT_ID }}
