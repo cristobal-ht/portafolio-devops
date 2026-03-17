@@ -114,6 +114,7 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f deployment.yaml
+          kubectl apply -f ingress.yaml
 
       # 7. Espera a que el deployment esté listo y verifica que corrió bien
       - name: Verify deployment
