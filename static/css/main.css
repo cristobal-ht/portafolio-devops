@@ -145,9 +145,46 @@ a { text-decoration: none; }
 /* Botón hamburguesa: para mobile */
 .navbar-toggler {
     border-color: var(--border);
+    z-index: 1001;
 }
 .navbar-toggler-icon {
     filter: invert(0.7);
+}
+
+/* Menú desplegable en móvil */
+.navbar-collapse {
+    background: transparent;
+}
+
+@media (max-width: 991px) {
+    /* En móvil el menú abierto tiene fondo sólido */
+    .navbar-collapse.show,
+    .navbar-collapse.collapsing {
+        background: rgba(20, 26, 36, 0.98);
+        border-top: 1px solid var(--border);
+        border-radius: 0 0 12px 12px;
+        padding: 12px 0;
+        margin-top: 8px;
+    }
+    /* Cada link del menú en móvil ocupa todo el ancho */
+    .navbar-nav .nav-link {
+        padding: 12px 24px !important;
+        border-bottom: 1px solid var(--border);
+        font-size: 1rem !important;
+    }
+    .navbar-nav .nav-link:last-child {
+        border-bottom: none;
+    }
+    /* Quitar el subrayado en móvil */
+    .navbar-nav .nav-link.active::after {
+        display: none;
+    }
+    /* Link activo con fondo sutil */
+    .navbar-nav .nav-link.active {
+        color: var(--accent) !important;
+        background: var(--accent-glow);
+        border-radius: 6px;
+    }
 }
 
 
@@ -1214,15 +1251,6 @@ a { text-decoration: none; }
 /* ============================================================
    9. RESPONSIVE — Ajustes para pantallas pequeñas (mobile)
 ============================================================ */
-/* Imagen principal del artículo de blog */
-.blog-article-img {
-    width: 100%;
-    max-height: 420px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 32px;
-    border: 1px solid var(--border);
-}
 @media (max-width: 768px) {
     /* Hero se apila en columna en móvil */
     .hero-container {
@@ -1274,10 +1302,62 @@ a { text-decoration: none; }
 
     /* Diagrama con scroll horizontal */
     .arch-diagram { overflow-x: auto; flex-wrap: nowrap; }
+    .arch-diagram-full { padding: 16px; }
+    .arch-label-row { display: none; }
 }
 
 @media (max-width: 480px) {
     .stack-grid, .stack-full-grid { grid-template-columns: 1fr; }
     .project-card-header { flex-direction: column; }
     .hero-name { font-size: 2.4rem; }
+}
+
+/* ---- DIAGRAMA DE ARQUITECTURA COMPLETO ---- */
+.arch-section-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 28px 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.arch-diagram-full {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 16px 0 28px;
+    overflow-x: auto;
+}
+.arch-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+.arch-label-row {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 80px;
+    flex-shrink: 0;
+    text-align: right;
+    padding-right: 12px;
+    border-right: 1px solid var(--border);
+}
+.arch-nodes-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.arch-divider {
+    text-align: center;
+    color: var(--accent);
+    font-size: 1.4rem;
+    padding: 4px 0 4px 96px;
+    opacity: 0.6;
 }
