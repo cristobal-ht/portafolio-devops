@@ -4,9 +4,21 @@ metadata:
   name: mi-sitio-ingress
   annotations:
     kubernetes.io/ingress.class: "gce"
+    networking.gke.io/managed-certificates: "mi-certificado"
 spec:
   rules:
-  - http:
+  - host: cristobalht.cl
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mi-sitio-service
+            port:
+              number: 8080
+  - host: www.cristobalht.cl
+    http:
       paths:
       - path: /
         pathType: Prefix
