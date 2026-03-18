@@ -1237,15 +1237,12 @@ a { text-decoration: none; }
    8. ANIMACIONES DE SCROLL
    Los elementos con clase "fade-in" aparecen al entrar en pantalla
 ============================================================ */
-.fade-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
+<!-- Animaciones de scroll y navbar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ...
+        });
+    </script>
 
 /* ============================================================
    9. RESPONSIVE — Ajustes para pantallas pequeñas (mobile)
