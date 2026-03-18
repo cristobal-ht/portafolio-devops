@@ -1238,9 +1238,8 @@ a { text-decoration: none; }
    Los elementos con clase "fade-in" aparecen al entrar en pantalla
 ============================================================ */
 .fade-in {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    opacity: 1;
+    transform: translateY(0);
 }
 .fade-in.visible {
     opacity: 1;
