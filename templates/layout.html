@@ -98,13 +98,24 @@
 
     <!-- Animaciones de scroll y navbar -->
     <script>
-        // Activa clase "visible" en elementos cuando entran en pantalla
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in');
 
-        // Navbar con fondo sólido al hacer scroll
-        window.addEventLis
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.05 });
+                elements.forEach(el => observer.observe(el));
+            } else {
+                elements.forEach(el => el.classList.add('visible'));
+            }
+
+            window.addEventListener('scroll', () => {
+                document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+            });
+        });
+    </script>
