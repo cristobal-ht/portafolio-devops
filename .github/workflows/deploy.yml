@@ -16,7 +16,7 @@ env:
   GKE_CLUSTER: pagina-web
   GKE_ZONE: us-central1-c
   IMAGE_NAME: mi-web-app
-  IMAGE_TAG: "2.0"
+  IMAGE_TAG: "3.0"
   REGION: us-central1
   # ID del Workload Identity Provider que creamos
   WORKLOAD_IDENTITY_PROVIDER: projects/190259424084/locations/global/workloadIdentityPools/github-pool/providers/github-provider
