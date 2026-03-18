@@ -118,6 +118,13 @@ jobs:
           kubectl apply -f ingress.yaml
 
       # 7. Espera a que el deployment esté listo y verifica que corrió bien
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f deployment.yaml
+          kubectl apply -f certificate.yaml
+          kubectl apply -f ingress.yaml
+          kubectl rollout restart deployment/mi-sitio-deployment
+
       - name: Verify deployment
         run: |
           kubectl rollout status deployment/mi-sitio-deployment
