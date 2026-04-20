@@ -1201,18 +1201,19 @@ a { text-decoration: none; }
     border-top: 1px solid var(--border);
     background: var(--bg-dark);
 }
+.site-footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    background: var(--bg-dark);
+    min-height: 80px;
+}
 .site-footer .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 16px;
-}
-.footer-inner {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.875rem;
+    height: 100%;
 }
 .footer-name {
     font-family: var(--font-display);
