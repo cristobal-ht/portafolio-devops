@@ -1,0 +1,9 @@
+apiVersion: v1        # versión de la API de Kubernetes
+kind: ConfigMap       # tipo de objeto
+metadata:
+  name: app-config    # nombre del ConfigMap
+  namespace: desarrollo  # en qué namespace vive
+data:
+  APP_ENV: "development"     # ambiente
+  APP_COLOR: "blue"          # color para identificar el ambiente visualmente
+  APP_DEBUG: "true"          # mostrar errores detallados
