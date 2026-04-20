@@ -1224,11 +1224,18 @@ a { text-decoration: none; }
 .footer-links {
     display: flex;
     gap: 16px;
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 .footer-links a {
     color: var(--text-muted);
     font-size: 1.2rem;
     transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 .footer-links a:hover { color: var(--accent); }
 
