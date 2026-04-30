@@ -1,0 +1,1 @@
+--- title: "Post de prueba desde n8n" slug: "post-prueba-desde-n8n" date: "2026-04-30" summary: "Este post fue creado automáticamente desde n8n para validar el flujo hacia GitHub." image: "" tags: ["DevOps", "n8n", "GitHub"] status: "draft" ---  Este es un post de prueba generado automáticamente desde n8n.
