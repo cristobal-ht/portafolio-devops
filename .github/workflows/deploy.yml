@@ -104,10 +104,10 @@ jobs:
             --zone ${{ env.GKE_ZONE }} \
             --project ${{ env.PROJECT_ID }}
 
-      # 5. sed reemplaza la línea "image:" en deployment.yaml con la imagen real
+      # 5. sed reemplaza la línÑea "image:" en deployment.yaml con la imagen real
       #    Así el deployment siempre usa la imagen que acabamos de construir
       - name: Update image in deployment.yaml
-        run:
+        run: |
           sed -i "s|image: paginaweb:1.0|image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/cris-repo/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}|g" deployment.yaml
 
       # 6. Aplica los manifiestos de Kubernetes en el cluster
