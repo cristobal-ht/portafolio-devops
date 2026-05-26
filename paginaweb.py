@@ -1,67 +1,150 @@
-# ============================================================
-# paginaweb.py — Aplicación Flask del portafolio DevOps
-# 
-# Flask es un framework web minimalista para Python.
-# Este archivo es el "cerebro" del sitio: define las rutas URL
-# y qué template HTML renderizar para cada una.
-# ============================================================
+from datetime import date
+from functools import lru_cache
+from pathlib import Path
+import re
 
-from flask import Flask, render_template, request
+from flask import Flask, abort, render_template
+from markdown import markdown
 
-# --- Inicialización ---
-# Flask(__name__) crea la aplicación usando el directorio actual
-# como punto de referencia para buscar templates y archivos estáticos
+
 app = Flask(__name__)
+POSTS_DIR = Path(__file__).parent / "content" / "posts"
 
 
-# --- RUTA HOME: "/" ---
-# El decorador @app.route() indica qué URL activa esta función.
-# render_template() busca el archivo en la carpeta "templates/"
+def _strip_quotes(value):
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+        return value[1:-1]
+    return value
+
+
+def _parse_tags(raw_value):
+    cleaned = raw_value.strip()
+    if cleaned.startswith("[") and cleaned.endswith("]"):
+        cleaned = cleaned[1:-1]
+    return [tag.strip().strip('"').strip("'") for tag in cleaned.split(",") if tag.strip()]
+
+
+def _excerpt_from_markdown(body, length=180):
+    plain_text = re.sub(r"[#*_>`-]", " ", body)
+    plain_text = re.sub(r"\s+", " ", plain_text).strip()
+    return plain_text[:length].rstrip() + ("..." if len(plain_text) > length else "")
+
+
+def _load_post_file(path):
+    raw_text = path.read_text(encoding="utf-8")
+    metadata = {}
+    body = raw_text
+
+    if raw_text.startswith("---"):
+        parts = raw_text.split("---", 2)
+        if len(parts) == 3:
+            _, front_matter, body = parts
+            for line in front_matter.strip().splitlines():
+                if ":" not in line:
+                    continue
+                key, value = line.split(":", 1)
+                metadata[key.strip()] = _strip_quotes(value.strip())
+
+    slug = metadata.get("slug", path.stem)
+    date_value = metadata.get("date", date.today().isoformat())
+
+    try:
+        parsed_date = date.fromisoformat(date_value)
+    except ValueError:
+        parsed_date = date.today()
+        date_value = parsed_date.isoformat()
+
+    tags = _parse_tags(metadata.get("tags", ""))
+    summary = metadata.get("summary") or _excerpt_from_markdown(body)
+    title = metadata.get("title", slug.replace("-", " ").title())
+    status = metadata.get("status", "draft").lower()
+    image = metadata.get("image", "").strip()
+
+    return {
+        "title": title,
+        "slug": slug,
+        "date": parsed_date,
+        "date_display": date_value,
+        "summary": summary,
+        "image": image,
+        "tags": tags,
+        "status": status,
+        "content_html": markdown(body.strip(), extensions=["fenced_code", "tables"]),
+    }
+
+
+@lru_cache(maxsize=1)
+def load_posts():
+    posts = []
+
+    if POSTS_DIR.exists():
+        for path in POSTS_DIR.glob("*.md"):
+            posts.append(_load_post_file(path))
+
+    posts.sort(key=lambda post: post["date"], reverse=True)
+    return posts
+
+
+def get_post_by_slug(slug, include_drafts=False):
+    for post in load_posts():
+        if post["slug"] != slug:
+            continue
+        if post["status"] != "published" and not include_drafts:
+            return None
+        return post
+    return None
+
+
 @app.route("/")
 def home():
     return render_template("home.html")
 
 
-# --- RUTA PROYECTOS: "/proyectos" ---
-# Página con el listado detallado de proyectos DevOps
 @app.route("/proyectos")
 def proyectos():
     return render_template("proyectos.html")
 
 
-# --- RUTA STACK: "/stack" ---
-# Página con el stack tecnológico y herramientas usadas
 @app.route("/stack")
 def stack():
     return render_template("stack.html")
 
 
-# --- RUTA BLOG: "/blog" ---
-# Listado de artículos técnicos del blog
 @app.route("/blog")
 def blog():
-    return render_template("blog.html")
+    posts = [post for post in load_posts() if post["status"] == "published"]
+    return render_template("blog.html", posts=posts)
 
 
-# --- RUTA ABOUT: "/about" ---
-# Página "Sobre Mí" con información personal y redes sociales
+@app.route("/blog/<slug>")
+def blog_post(slug):
+    post = get_post_by_slug(slug)
+    if not post:
+        abort(404)
+    return render_template("blog_post.html", post=post)
+
+
+@app.route("/preview/<slug>")
+def preview_post(slug):
+    post = get_post_by_slug(slug, include_drafts=True)
+    if not post:
+        abort(404)
+    return render_template("blog_post.html", post=post, preview_mode=True)
+
+
 @app.route("/about")
 def about():
     return render_template("about.html")
+# Ruta: Política de Privacidad — Bot WhatsApp
+@app.route("/politica-de-privacidad-bot-whatsapp")
+def politica_privacidad():
+    return render_template("politica-privacidad.html")
 
-@app.route("/blog/primera-pagina-web")
-def blog_primera_pagina():
-    return render_template("blog/primera-pagina-web.html")
+# Ruta: Términos del Servicio — Bot WhatsApp
+@app.route("/terminos-bot-whatsapp")
+def terminos_servicio():
+    return render_template("terminos-servicio.html")
 
-@app.route("/blog/menu-cocineria")
-def blog_menu_cocineria():
-    return render_template("blog/menu-cocineria.html")
 
-# --- INICIO DE LA APLICACIÓN ---
-# Este bloque solo se ejecuta cuando corres el script directamente
-# (no cuando lo importa otro módulo, como en producción con Gunicorn)
 if __name__ == "__main__":
-    # debug=True: muestra errores detallados y recarga automáticamente al guardar
-    # host='0.0.0.0': escucha en todas las interfaces de red (necesario para Docker/K8s)
-    # port=8080: puerto donde corre la app (alineado con el containerPort del deployment.yaml)
-    app.run(debug=True, host='0.0.0.0', port=8080)
+    app.run(debug=True, host="0.0.0.0", port=8080)

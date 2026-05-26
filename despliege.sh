@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail # Detener ante errores, variables no definidas o fallos en pipes
 
 # --- Configuración de variables ---
 NOMBRE_IMAGEN="paginaweb:1.0"
@@ -20,9 +21,11 @@ echo "🔄 Paso 3: Reiniciando Pods en Kubernetes..."
 kubectl apply -f deployment.yaml
 kubectl rollout restart deployment/$DEPLOYMENT
 
-# Esperar un momento a que el pod esté listo
-echo "Wait: Esperando a que el Pod suba..."
-sleep 5
+# Esperar de forma inteligente a que el pod esté listo
+echo "⏳ Esperando a que el Deployment esté listo..."
+kubectl rollout status deployment/$DEPLOYMENT --timeout=90s
+
+echo "✅ Pods activos:"
 kubectl get pods
 
 # 4. Levanta el portforward

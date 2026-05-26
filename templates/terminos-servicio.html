@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- ============================================================
+     TÉRMINOS DEL SERVICIO — Bot WhatsApp Barbería Maki
+     Ruta: /terminos-bot-whatsapp
+============================================================ -->
+<section class="page-hero">
+    <div class="container">
+        <h1 class="page-hero-title fade-in">Términos del <span class="accent">Servicio</span></h1>
+        <p class="page-hero-sub fade-in">Bot de Atención y Agendamiento por WhatsApp — Barbería Maki</p>
+        <p class="page-hero-sub fade-in" style="font-size: 0.85rem; color: var(--text-muted);">
+            Última actualización: mayo de 2025
+        </p>
+    </div>
+</section>
+
+<section class="section-dark">
+    <div class="container">
+        <div class="legal-content fade-in">
+
+            <!-- Aviso de demostración -->
+            <div class="legal-notice">
+                <strong>Aviso:</strong> Este servicio corresponde a una demostración técnica desarrollada como
+                proyecto de automatización con inteligencia artificial para pequeñas y medianas empresas (pymes).
+                "Barbería Maki" es el nombre del negocio cliente utilizado en esta demo.
+            </div>
+
+            <!-- 1. Finalidad del bot -->
+            <h2>1. Finalidad del Servicio</h2>
+            <p>
+                Este bot de WhatsApp ha sido desarrollado para facilitar la comunicación entre los
+                clientes y <strong>Barbería Maki</strong>. Su propósito es permitir a los usuarios
+                consultar información sobre los servicios disponibles y realizar solicitudes de
+                agendamiento de manera automatizada.
+            </p>
+
+            <!-- 2. Qué permite hacer -->
+            <h2>2. ¿Qué Permite Hacer este Bot?</h2>
+            <ul class="legal-list">
+                <li>Consultar información general sobre los servicios de Barbería Maki</li>
+                <li>Solicitar una hora de atención indicando servicio, día y hora preferidos</li>
+                <li>Recibir confirmación del registro de tu solicitud</li>
+                <li>Consultar el estado de una solicitud previamente realizada</li>
+            </ul>
+
+            <!-- 3. Confirmación de citas -->
+            <h2>3. Confirmación de Solicitudes de Agendamiento</h2>
+            <p>
+                <strong>Importante:</strong> El envío de una solicitud a través de este bot
+                <strong>no implica una confirmación definitiva de la hora solicitada</strong>.
+                Toda solicitud queda en estado pendiente hasta que el negocio la revise y confirme
+                explícitamente mediante un mensaje de respuesta.
+            </p>
+            <p>
+                Barbería Maki se reserva el derecho de rechazar o proponer una hora alternativa
+                en caso de que el horario solicitado no esté disponible.
+            </p>
+
+            <!-- 4. Responsabilidad del usuario -->
+            <h2>4. Responsabilidad del Usuario</h2>
+            <p>Al usar este servicio, el usuario se compromete a:</p>
+            <ul class="legal-list">
+                <li>Proporcionar información veraz y actualizada (nombre, servicio solicitado, horario)</li>
+                <li>No utilizar el bot con fines distintos a los descritos en estos términos</li>
+                <li>No enviar contenido ofensivo, spam ni información falsa</li>
+                <li>Notificar con anticipación razonable si no podrá asistir a una cita confirmada</li>
+            </ul>
+
+            <!-- 5. Disponibilidad -->
+            <h2>5. Disponibilidad del Servicio</h2>
+            <p>
+                Este servicio se ofrece con la intención de estar disponible de forma continua,
+                sin embargo, pueden ocurrir interrupciones por razones técnicas, mantenimiento
+                o causas ajenas a nuestro control.
+            </p>
+            <p>
+                No garantizamos disponibilidad ininterrumpida del bot ni de las plataformas
+                de terceros involucradas (WhatsApp, n8n, Google Sheets).
+            </p>
+
+            <!-- 6. Limitación de responsabilidad -->
+            <h2>6. Limitación de Responsabilidad</h2>
+            <p>
+                Este servicio se proporciona con fines de facilitar la comunicación y el
+                agendamiento. No nos hacemos responsables por:
+            </p>
+            <ul class="legal-list">
+                <li>Errores derivados de información incorrecta proporcionada por el usuario</li>
+                <li>Interrupciones del servicio causadas por terceros (Meta, Google, etc.)</li>
+                <li>Malentendidos derivados de solicitudes ambiguas o incompletas</li>
+                <li>Pérdida de datos por fallas técnicas fuera de nuestro control</li>
+            </ul>
+
+            <!-- 7. Cambios a los términos -->
+            <h2>7. Cambios a estos Términos</h2>
+            <p>
+                Estos términos pueden ser modificados en cualquier momento. La versión actualizada
+                estará siempre disponible en esta página, con la fecha de última actualización
+                indicada al inicio del documento.
+            </p>
+            <p>
+                El uso continuado del servicio después de una modificación implica la aceptación
+                de los nuevos términos.
+            </p>
+
+            <!-- 8. Contacto -->
+            <h2>8. Contacto</h2>
+            <p>
+                Para cualquier consulta relacionada con estos términos o el funcionamiento del
+                servicio, puedes escribirnos a:
+                <a href="mailto:cristobal.hernandez.777@gmail.com" class="inline-link">
+                    cristobal.hernandez.777@gmail.com
+                </a>
+            </p>
+
+            <!-- Links cruzados -->
+            <div class="legal-cross-links">
+                <p>
+                    También puedes revisar nuestra
+                    <a href="{{ url_for('politica_privacidad') }}" class="inline-link">
+                        Política de Privacidad
+                    </a>.
+                </p>
+            </div>
+
+            <!-- Botón volver -->
+            <div class="mt-4">
+                <a href="{{ url_for('home') }}" class="btn-outline-custom">← Volver al inicio</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+# n8n values for GKE using the community Helm chart.
+# This file is safe to version because the encryption key lives in Kubernetes,
+# not in Git. The Secret must be named `n8n-secret` and expose the key
+# `N8N_ENCRYPTION_KEY`.
+
+strategy:
+  type: Recreate
+
+fullnameOverride: n8n
+
+main:
+  editorBaseUrl: "https://n8n-admin.cristobalht.cl"
+
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "100m"
+    limits:
+      memory: "1024Mi"
+      cpu: "500m"
+
+  persistence:
+    enabled: true
+    storageClass: "standard-rwo"
+    size: 5Gi
+
+  extraEnvVars:
+    N8N_HOST: "n8n-admin.cristobalht.cl"
+    N8N_PROTOCOL: "https"
+    N8N_PROXY_HOPS: "1"
+    WEBHOOK_URL: "https://n8n-hooks.cristobalht.cl/"
+
+  readinessProbe:
+    httpGet:
+      path: /healthz/readiness
+      port: http
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: http
+    initialDelaySeconds: 90
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+
+service:
+  type: ClusterIP
+  port: 5678
+
+ingress:
+  enabled: false
+
+existingEncryptionKeySecret: n8n-secret
+timezone: "America/Santiago"

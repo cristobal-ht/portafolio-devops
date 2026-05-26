@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: n8n-hooks
+  namespace: n8n
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    networking.gke.io/managed-certificates: "n8n-hooks-certificado"
+    networking.gke.io/v1beta1.FrontendConfig: "n8n-https-redirect"
+spec:
+  rules:
+    - host: n8n-hooks.cristobalht.cl
+      http:
+        paths:
+          - path: /webhook
+            pathType: Prefix
+            backend:
+              service:
+                name: n8n-hooks
+                port:
+                  number: 5678
+          - path: /webhook-test
+            pathType: Prefix
+            backend:
+              service:
+                name: n8n-hooks
+                port:
+                  number: 5678
+          - path: /webhook-waiting
+            pathType: Prefix
+            backend:
+              service:
+                name: n8n-hooks
+                port:
+                  number: 5678

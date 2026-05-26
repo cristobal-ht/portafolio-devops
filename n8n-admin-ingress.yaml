@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: n8n-admin
+  namespace: n8n
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    networking.gke.io/managed-certificates: "n8n-admin-certificado"
+    networking.gke.io/v1beta1.FrontendConfig: "n8n-https-redirect"
+spec:
+  rules:
+    - host: n8n-admin.cristobalht.cl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: n8n-admin
+                port:
+                  number: 5678

@@ -6,6 +6,6 @@ WORKDIR /app
 # Se utilizan las comillas si el archivo tieneun espacio en el nombre"
 COPY . .
 #4. agregar las librerias que utilice
-RUN pip install flask
+RUN pip install flask markdown
 #5. Indicarle a docker como ejecutar el programa
 CMD ["python", "paginaweb.py"]

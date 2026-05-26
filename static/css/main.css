@@ -1201,19 +1201,18 @@ a { text-decoration: none; }
     border-top: 1px solid var(--border);
     background: var(--bg-dark);
 }
-.site-footer {
-    padding: 32px 0;
-    border-top: 1px solid var(--border);
-    background: var(--bg-dark);
-    min-height: 80px;
-}
 .site-footer .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 16px;
-    height: 100%;
+}
+.footer-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.875rem;
 }
 .footer-name {
     font-family: var(--font-display);
@@ -1225,24 +1224,19 @@ a { text-decoration: none; }
 .footer-links {
     display: flex;
     gap: 16px;
-.footer-links {
-    display: flex;
-    align-items: center;
-    gap: 16px;
 }
 .footer-links a {
     color: var(--text-muted);
     font-size: 1.2rem;
     transition: color 0.2s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
 }
 .footer-links a:hover { color: var(--accent); }
 
 
-/* 8. Animaciones de scroll —
-   Los elementos con clase "fade-in" aparecen al entrar en pantalla */
+/* ============================================================
+   8. ANIMACIONES DE SCROLL
+   Los elementos con clase "fade-in" aparecen al entrar en pantalla
+============================================================ */
 .fade-in {
     opacity: 0;
     transform: translateY(24px);
@@ -1252,6 +1246,7 @@ a { text-decoration: none; }
     opacity: 1;
     transform: translateY(0);
 }
+
 
 /* ============================================================
    9. RESPONSIVE — Ajustes para pantallas pequeñas (mobile)
@@ -1366,3 +1361,85 @@ a { text-decoration: none; }
     padding: 4px 0 4px 96px;
     opacity: 0.6;
 }
+
+/* ============================================================
+   PÁGINAS LEGALES — Política de Privacidad y Términos
+============================================================ */
+
+/* Contenedor principal del contenido legal */
+.legal-content {
+    max-width: 780px;
+    margin: 0 auto;
+    color: var(--text-secondary);
+    line-height: 1.9;
+}
+
+/* Títulos de sección */
+.legal-content h2 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 40px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Párrafos */
+.legal-content p {
+    margin-bottom: 16px;
+}
+
+/* Listas */
+.legal-list {
+    list-style: none;
+    margin: 12px 0 20px 0;
+}
+.legal-list li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+}
+.legal-list li:last-child { border-bottom: none; }
+.legal-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.85rem;
+}
+
+/* Aviso de demostración */
+.legal-notice {
+    background: var(--accent-glow);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Links cruzados entre páginas legales */
+.legal-cross-links {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+/* Footer legal links */
+.footer-legal {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+.footer-legal a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+.footer-legal a:hover { color: var(--accent); }

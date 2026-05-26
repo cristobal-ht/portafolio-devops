@@ -107,8 +107,8 @@ jobs:
       # 5. sed reemplaza la línea "image:" en deployment.yaml con la imagen real
       #    Así el deployment siempre usa la imagen que acabamos de construir
       - name: Update image in deployment.yaml
-        run: |
-          sed -i "s|image:.*|image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/cris-repo/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}|g" deployment.yaml
+        run:
+          sed -i "s|image: paginaweb:1.0|image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/cris-repo/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}|g" deployment.yaml
 
       # 6. Aplica los manifiestos de Kubernetes en el cluster
       - name: Deploy to Kubernetes
@@ -116,15 +116,8 @@ jobs:
           kubectl apply -f deployment.yaml
           kubectl apply -f certificate.yaml
           kubectl apply -f ingress.yaml
-
-      # 7. Espera a que el deployment esté listo y verifica que corrió bien
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl apply -f deployment.yaml
-          kubectl apply -f certificate.yaml
-          kubectl apply -f ingress.yaml
           kubectl rollout restart deployment/mi-sitio-deployment
 
-      - name: Verify deployment
+      - name: Verify Deployment Status
         run: |
           kubectl rollout status deployment/mi-sitio-deployment
